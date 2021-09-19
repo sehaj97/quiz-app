@@ -11,7 +11,7 @@
     <title>Coding Quiz</title>
   </head>
   <body class="bg-dark text-white">
-    <header class="mx-auto p-4 pt-5">
+    <header class="mx-auto p-4 pt-3">
         <div class="container">
             <div class="row">
               <div class="col d-flex justify-content-start">
@@ -24,7 +24,7 @@
         </div>
       </header>
 
-      <main class="mx-auto p-4 pt-5">
+      <main class="mx-auto p-4 pt-3">
         <section id="quiz-wrapper" class="container">
           <div class="row">
             <div class="col d-flex justify-content-center">
@@ -33,7 +33,17 @@
           </div>
           
           <div id="start-quiz-container" class="row">
-            <div class="col d-flex justify-content-center p-3">
+            <div class="col d-flex flex-column align-items-center justify-content-center p-3">
+              <ul class="list-group text-center m-3">
+                <li class="list-group-item">RULES</li>
+                <li class="list-group-item list-group-item-dark">All Questions are based on JavaScript</li>
+                <li class="list-group-item list-group-item-dark">Total Questions: 10</li>
+                <li class="list-group-item list-group-item-dark">Total Given Time : 150 secs</li>
+                <li class="list-group-item list-group-item-dark">Wrong answer deduction : 10 secs</li>
+                <li class="list-group-item list-group-item-dark">Right answer reward : 1 point</li>
+                <li class="list-group-item list-group-item-dark">Once completed please enter your initials to view score board.</li>
+                <li class="list-group-item list-group-item-dark">Happy Learning!</li>
+              </ul>
               <button type="button" class="btn btn-info" id="start-quiz">START QUIZ</button>
             </div>
           </div>
