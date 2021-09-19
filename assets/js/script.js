@@ -34,6 +34,21 @@ var quizData = [
         "correct_answer_id": "answer_a",
         "explanation": "this is why",
         "tip": "look mdn"
+      },
+      
+      {
+        "id": 3,
+        "question": "Question3?",
+        "description": "this is question 3",
+        "answers": {
+          "answer_a": "correct",
+          "answer_b": "awrong",
+          "answer_c": "bwrong",
+          "answer_d": "cwrong"
+        },
+        "correct_answer_id": "answer_c",
+        "explanation": "this is why",
+        "tip": "look mdn"
       }
   ]
 var quizDataId = 0;
@@ -85,8 +100,12 @@ function addAnswers(){
 function checkAnswers(event){
     if(event.target.id == quizData[quizDataId].correct_answer_id){
         console.log("right");
-        quizDataId++;
-        addQuestion();
+        if (quizData[quizDataId].id < quizData.length){
+            quizDataId++;
+            addQuestion();
+        } else {
+            window.location.reload();
+        }
     } else {
         console.log("no");
     }
