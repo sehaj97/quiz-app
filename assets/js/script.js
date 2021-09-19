@@ -9,11 +9,15 @@ var answersButton = document.getElementsByClassName("answers");
 var quizTimer = 0;
 var timeClock = null;
 var score = 0;
+var quizDataId = 0;
+var scoreData = [];
+var scoreDataObject = {};
+var scoreDataId = 0;
+var penaltyTime = 0;
 var quizData = [
     {
         "id": 1,
         "question": "Question1?",
-        "description": "this is question 1",
         "answers": {
           "answer_a": "wrong",
           "answer_b": "correct",
@@ -26,7 +30,6 @@ var quizData = [
       {
         "id": 2,
         "question": "Question2?",
-        "description": "this is question 2",
         "answers": {
           "answer_a": "correct",
           "answer_b": "wrong",
@@ -39,7 +42,6 @@ var quizData = [
       {
         "id": 3,
         "question": "Question3?",
-        "description": "this is question 3",
         "answers": {
           "answer_a": "wrong",
           "answer_b": "wrong",
@@ -49,10 +51,8 @@ var quizData = [
         "correct_answer_id": "answer_c"
       }
   ]
-var quizDataId = 0;
-var scoreData = [];
-var scoreDataObject = {};
-var scoreDataId = 0;
+
+
 function countDown(){
     timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2});    
     quizTimer --;
@@ -78,7 +78,8 @@ function startQuiz(){
     answersContainer.classList.remove('d-none');
     quizWrapper.classList.add("quiz-ongoing");
     quizStatus.textContent = "All Done!";
-    quizTimer = 10;
+    quizTimer = 150;
+    penaltyTime = 10;
     score = 0;
     quizDataId = 0;
     addQuestion();
@@ -120,7 +121,7 @@ function checkAnswers(event){
             return;
         }
     } else {
-        quizTimer = quizTimer - 5;
+        quizTimer = quizTimer - penaltyTime;
         event.stopImmediatePropagation();
         quizDataId++;
         if (quizDataId < quizData.length && quizTimer > -1) {
@@ -136,7 +137,8 @@ function checkAnswers(event){
 
 function logScores(){
     document.querySelector("#score-text").textContent = score;
-
+    quizTimer = 0;
+    timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2}); 
     scoreWrapper.classList.remove('d-none');
     answersContainer.classList.add('d-none');
     quizWrapper.classList.add('d-none');
