@@ -159,17 +159,30 @@ function saveScore(){
         score: score
     };
     console.log(scoreData);
-    if (localStorage.getItem("scores") !== null && score >= scoreData[0].id){
-            scoreData.unshift(scoreDataObject);
-            scoreDataId++;
-    } else {
-        scoreData.push(scoreDataObject);
-        scoreDataId++;
-    }
+    scoreData.unshift(scoreDataObject);
+    scoreDataId++;
     for(i=0;i<scoreData.length; i++){
         scoreData[i].id = i;
     }
     localStorage.setItem("scores", JSON.stringify(scoreData));
+    viewScoreBoard();
 }
+function viewScoreBoard(){
+    document.querySelector("#score-board-wrapper").classList.remove("d-none");
+    if(scoreWrapper.classList.contains('d-none')===false){
+        scoreWrapper.classList.add('d-none');
+    }
+    if(quizWrapper.classList.contains('d-none')===false){
+        quizWrapper.classList.add('d-none');
+    }
+}
+function refreshPage(){
+    window.location.reload();
+} 
+
+function clearScores(){
+    window.localStorage.clear();
+} 
+
 document.querySelector("#start-quiz").addEventListener("click", startQuiz);
 

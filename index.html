@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
               <div class="col d-flex justify-content-start">
-                <a href="#" class="link-info text-decoration-none">View High Scores</a>
+                <a href="#" class="link-info text-decoration-none" onclick="viewScoreBoard()">View Scores</a>
               </div>
               <div class="col d-flex justify-content-end">
                 <span>Timer: &nbsp;</span> <span id="time-counter">00</span>
@@ -78,12 +78,10 @@
           </div>
         </section>
 
-        
-
-        <section id="score-wrapper" class="container">
+        <section id="score-board-wrapper" class="container d-none">
           <div class="row">
             <div class="col d-flex justify-content-center">
-              <h1 id="heading-questions">High Scores</h1>
+              <h1 id="heading-questions">Score Board</h1>
             </div>
           </div>
           
@@ -93,19 +91,24 @@
               <table class="table table-primary">
                 <thead>
                   <tr class="table-primary">
-                    <th scope="col" class="table-primary">#</th>
                     <th scope="col" class="table-primary">Initials</th>
                     <th scope="col" class="table-primary">Scores</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id= "score-board">
                   <tr class="table-primary">
-                    <th scope="row" class="table-primary">1</th>
                     <td class="table-primary">Mark</td>
                     <td class="table-primary">Otto</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col d-flex justify-content-center p-3">
+              <button type="button" class="btn btn-info m-3" onclick="refreshPage()">Go Back</button>
+              <button type="button" class="btn btn-info m-3" onclick="clearScores()">Clear Scores</button>
             </div>
           </div>
         </section>
