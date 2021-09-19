@@ -20,9 +20,7 @@ var quizData = [
           "answer_c": "wrong",
           "answer_d": "wrong"
         },
-        "correct_answer_id": "answer_b",
-        "explanation": "this is why",
-        "tip": "look mdn"
+        "correct_answer_id": "answer_b"
       },
       
       {
@@ -35,9 +33,7 @@ var quizData = [
           "answer_c": "wrong",
           "answer_d": "wrong"
         },
-        "correct_answer_id": "answer_a",
-        "explanation": "this is why",
-        "tip": "look mdn"
+        "correct_answer_id": "answer_a"
       },
       
       {
@@ -50,9 +46,7 @@ var quizData = [
           "answer_c": "correct",
           "answer_d": "wrong"
         },
-        "correct_answer_id": "answer_c",
-        "explanation": "this is why",
-        "tip": "look mdn"
+        "correct_answer_id": "answer_c"
       }
   ]
 var quizDataId = 0;
@@ -175,14 +169,40 @@ function viewScoreBoard(){
     if(quizWrapper.classList.contains('d-none')===false){
         quizWrapper.classList.add('d-none');
     }
+    updateScoreBoard();
 }
+
+function updateScoreBoard(){
+    var scoreTable = document.querySelector("#score-board-list");
+    scoreTable.innerHTML = "";
+    data = JSON.parse(localStorage.getItem("scores"));
+    if (data !== null) {
+        for(i=0;i<data.length;i++){
+            var scoreRow = document.createElement('tr');
+            scoreRow.setAttribute("class", "table-primary");
+            scoreTable.appendChild(scoreRow);
+    
+            var scoreNameCol = document.createElement('td');
+            scoreNameCol.setAttribute("class", "table-primary");
+            scoreNameCol.textContent = data[i].initials;
+            scoreRow.appendChild(scoreNameCol);
+    
+            var scoreCol = document.createElement('td');
+            scoreCol.setAttribute("class", "table-primary");
+            scoreCol.textContent = data[i].score;
+            scoreRow.appendChild(scoreCol);
+        }
+    }
+}
+
 function refreshPage(){
     window.location.reload();
 } 
 
 function clearScores(){
     window.localStorage.clear();
-} 
+    updateScoreBoard();
+}
 
 document.querySelector("#start-quiz").addEventListener("click", startQuiz);
 
