@@ -5,7 +5,7 @@ var scoreWrapper = document.querySelector("#score-wrapper");
 var quizContainer = document.querySelector("#start-quiz-container");
 var answersContainer = document.querySelector("#answers-container");
 var answersButton = document.getElementsByClassName("answers");
-var quizTimer = 20;
+var quizTimer = 0;
 var timeClock = null;
 var score = 0;
 var quizData = [
@@ -77,7 +77,7 @@ function startQuiz(){
     quizContainer.classList.add('d-none');
     scoreWrapper.classList.add('d-none');
     answersContainer.classList.remove('d-none');
-    quizTimer = 20;
+    quizTimer = 100;
     score = 0;
     quizDataId = 0;
     addQuestion();
@@ -103,18 +103,21 @@ function addAnswers(){
 
 function checkAnswers(event){
     event.preventDefault();
+    console.log(quizDataId)
     if(event.target.id === quizData[quizDataId].correct_answer_id && quizData[quizDataId].id <= quizData.length){
         score++;
-        if (quizData[quizDataId].id === quizData.length) {
+        event.stopImmediatePropagation();
+        
+        quizDataId++;
+        console.log("ID",quizDataId)
+        if (quizDataId < quizData.length) {
+            addQuestion();
+        } else {
             event.stopImmediatePropagation();
             logScores();
             return;
         }
-        quizDataId++;
-        addQuestion();
     } else {
-        
-        event.stopImmediatePropagation();
         quizTimer = quizTimer - 5;
         if (quizTimer <= -1 || quizData[quizDataId].id === quizData.length) {
             timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2});
@@ -125,6 +128,8 @@ function checkAnswers(event){
         quizDataId++;
         addQuestion();
     }
+    
+    console.log(quizDataId)
 }
 
 function logScores(){
