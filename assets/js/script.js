@@ -76,7 +76,7 @@ function startQuiz(){
     quizContainer.classList.add('d-none');
     scoreWrapper.classList.add('d-none');
     answersContainer.classList.remove('d-none');
-    
+    quizWrapper.classList.add("quiz-ongoing");
     quizStatus.textContent = "All Done!";
     quizTimer = 10;
     score = 0;
@@ -136,9 +136,12 @@ function checkAnswers(event){
 
 function logScores(){
     document.querySelector("#score-text").textContent = score;
+
     scoreWrapper.classList.remove('d-none');
     answersContainer.classList.add('d-none');
     quizWrapper.classList.add('d-none');
+    quizWrapper.classList.remove('quiz-ongoing');
+    quizWrapper.classList.add('score-updating');
     stopCountDown();
 }
 
@@ -159,17 +162,22 @@ function saveScore(){
         scoreData[i].id = i;
     }
     localStorage.setItem("scores", JSON.stringify(scoreData));
+    quizWrapper.classList.remove('score-updating');
     viewScoreBoard();
 }
 function viewScoreBoard(){
-    document.querySelector("#score-board-wrapper").classList.remove("d-none");
-    if(scoreWrapper.classList.contains('d-none')===false){
-        scoreWrapper.classList.add('d-none');
+    if(quizWrapper.classList.contains('quiz-ongoing')===false && quizWrapper.classList.contains('score-updating') === false){
+        document.querySelector("#score-board-wrapper").classList.remove("d-none");
+        if(scoreWrapper.classList.contains('d-none')===false){
+            scoreWrapper.classList.add('d-none');
+        }
+        if(quizWrapper.classList.contains('d-none')===false){
+            quizWrapper.classList.add('d-none');
+        }
+        updateScoreBoard();
+    } else {
+        alert("please complete quiz and update your score in order to see score board!");
     }
-    if(quizWrapper.classList.contains('d-none')===false){
-        quizWrapper.classList.add('d-none');
-    }
-    updateScoreBoard();
 }
 
 function updateScoreBoard(){
