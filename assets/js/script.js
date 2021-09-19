@@ -176,7 +176,7 @@ function viewScoreBoard(){
         }
         updateScoreBoard();
     } else {
-        alert("please complete quiz and update your score in order to see score board!");
+        alert("please complete quiz and submit initials in order to see score board!");
     }
 }
 
