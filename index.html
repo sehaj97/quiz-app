@@ -39,15 +39,15 @@
           </div>
           
           <div class="row">
-            <div class="col-md-4 col-lg-5"></div>
-            <div id="answers-container" class="col-md-4 col-lg-2 d-flex flex-column align-items-center justify-content-center p-3 d-none">
-              <button type="button" id="answer_a" class="btn btn-info m-3 answers">
+            <div class="col-md-3 col-lg-4"></div>
+            <div id="answers-container" class="col-md-6 col-lg-4 d-flex flex-column align-items-center justify-content-center p-3 d-none">
+              <button type="button" id="answer_a" class="btn btn-info m-3 w-100 answers">
               </button>
-              <button type="button" id="answer_b" class="btn btn-info answers">
+              <button type="button" id="answer_b" class="btn btn-info m-3 w-100 answers">
               </button>
-              <button type="button" id="answer_c" class="btn btn-info answers">
+              <button type="button" id="answer_c" class="btn btn-info m-3 w-100 answers">
               </button>
-              <button type="button" id="answer_d" class="btn btn-info answers">
+              <button type="button" id="answer_d" class="btn btn-info m-3 w-100 answers">
               </button>
             </div>
           </div>
@@ -57,6 +57,55 @@
           <div class="row">
             <div class="col d-flex justify-content-center">
               <h1 id="heading-questions">Submit Your Score</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <h4 id="heading-questions"><span id="quiz-status"></span> Your Final Score is <span id="score-text"></span></h4>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-2 col-lg-3"></div>
+            <div class="col-md-8 col-lg-6 d-flex justify-content-center">
+              <div class="input-group">
+                <span class="input-group-text">Enter Your Initials</span>
+                <input id="name-initials" type="text" aria-label="intials" class="form-control">
+                <button type="button" class="btn btn-success mx-3" onClick="saveScore()">Submit</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        
+
+        <section id="score-wrapper" class="container">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <h1 id="heading-questions">High Scores</h1>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-2 col-lg-3"></div>
+            <div class="col-md-8 col-lg-6 d-flex justify-content-center">
+              <table class="table table-primary">
+                <thead>
+                  <tr class="table-primary">
+                    <th scope="col" class="table-primary">#</th>
+                    <th scope="col" class="table-primary">Initials</th>
+                    <th scope="col" class="table-primary">Scores</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-primary">
+                    <th scope="row" class="table-primary">1</th>
+                    <td class="table-primary">Mark</td>
+                    <td class="table-primary">Otto</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>

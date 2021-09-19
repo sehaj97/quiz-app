@@ -1,6 +1,7 @@
 var timeCounter = document.querySelector("#time-counter");
 var questions = document.querySelector("#heading-questions");
 var quizWrapper = document.querySelector("#quiz-wrapper");
+var quizStatus = document.querySelector("#quiz-status");
 var scoreWrapper = document.querySelector("#score-wrapper");
 var quizContainer = document.querySelector("#start-quiz-container");
 var answersContainer = document.querySelector("#answers-container");
@@ -55,11 +56,15 @@ var quizData = [
       }
   ]
 var quizDataId = 0;
-
+var scoreData = [];
+var scoreDataObject = {};
+var scoreDataId = 0;
 function countDown(){
     timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2});    
     quizTimer --;
     if (quizTimer <= -1) {
+        quizStatus.textContent = "Times Up!";
+        logScores();
         stopCountDown();
     }
 }
@@ -77,10 +82,17 @@ function startQuiz(){
     quizContainer.classList.add('d-none');
     scoreWrapper.classList.add('d-none');
     answersContainer.classList.remove('d-none');
-    quizTimer = 100;
+    
+    quizStatus.textContent = "All Done!";
+    quizTimer = 10;
     score = 0;
     quizDataId = 0;
     addQuestion();
+
+    if (localStorage.getItem("scores") !== null) {
+        scoreData = JSON.parse(localStorage.getItem("scores"));
+        scoreDataId = scoreData.length;
+    }
     
 }
 
@@ -103,11 +115,9 @@ function addAnswers(){
 
 function checkAnswers(event){
     event.preventDefault();
-    console.log(quizDataId)
     if(event.target.id === quizData[quizDataId].correct_answer_id && quizData[quizDataId].id <= quizData.length){
         score++;
         event.stopImmediatePropagation();
-        
         quizDataId++;
         if (quizDataId < quizData.length) {
             addQuestion();
@@ -117,10 +127,7 @@ function checkAnswers(event){
         }
     } else {
         quizTimer = quizTimer - 5;
-        
         event.stopImmediatePropagation();
-        console.log("ID",quizDataId);
-        
         quizDataId++;
         if (quizDataId < quizData.length && quizTimer > -1) {
             addQuestion();
@@ -131,16 +138,38 @@ function checkAnswers(event){
             return;
         }
     }
-    
-    console.log(quizDataId)
 }
 
 function logScores(){
-    console.log("score", score);
+    document.querySelector("#score-text").textContent = score;
     scoreWrapper.classList.remove('d-none');
     answersContainer.classList.add('d-none');
     quizWrapper.classList.add('d-none');
     stopCountDown();
+}
+
+function saveScore(){
+    if (document.querySelector("#name-initials").value === ""){
+        alert("please enter initials");
+        return;
+    }
+    scoreDataObject = {
+        id: scoreDataId,
+        initials: document.querySelector("#name-initials").value,
+        score: score
+    };
+    console.log(scoreData);
+    if (localStorage.getItem("scores") !== null && score >= scoreData[0].id){
+            scoreData.unshift(scoreDataObject);
+            scoreDataId++;
+    } else {
+        scoreData.push(scoreDataObject);
+        scoreDataId++;
+    }
+    for(i=0;i<scoreData.length; i++){
+        scoreData[i].id = i;
+    }
+    localStorage.setItem("scores", JSON.stringify(scoreData));
 }
 document.querySelector("#start-quiz").addEventListener("click", startQuiz);
 
