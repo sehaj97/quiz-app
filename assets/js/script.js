@@ -6,6 +6,8 @@ var scoreWrapper = document.querySelector("#score-wrapper");
 var quizContainer = document.querySelector("#start-quiz-container");
 var answersContainer = document.querySelector("#answers-container");
 var answersButton = document.getElementsByClassName("answers");
+var divider = document.querySelector(".dropdown-divider");
+var result = document.querySelector(".question-result");
 var quizTimer = 0;
 var timeClock = null;
 var score = 0;
@@ -114,6 +116,7 @@ function checkAnswers(event){
         score++;
         event.stopImmediatePropagation();
         quizDataId++;
+        getResult("That was correct answer!");
         if (quizDataId < quizData.length) {
             addQuestion();
         } else {
@@ -124,10 +127,12 @@ function checkAnswers(event){
         quizTimer = quizTimer - penaltyTime;
         event.stopImmediatePropagation();
         quizDataId++;
+        getResult("That was wrong answer!");
         if (quizDataId < quizData.length && quizTimer > -1) {
             addQuestion();
         } else {
             timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2});
+             getResult("That was wrong answer!");
             logScores();
             stopCountDown();
             return;
@@ -165,6 +170,7 @@ function saveScore(){
     }
     localStorage.setItem("scores", JSON.stringify(scoreData));
     quizWrapper.classList.remove('score-updating');
+    removeResult();
     viewScoreBoard();
 }
 function viewScoreBoard(){
@@ -212,6 +218,18 @@ function refreshPage(){
 function clearScores(){
     window.localStorage.clear();
     updateScoreBoard();
+} 
+
+function getResult(answerState){
+    divider.classList.remove("d-none");
+    result.classList.remove("d-none");
+    result.textContent = answerState;
+} 
+
+function removeResult(){
+    divider.classList.add("d-none");
+    result.classList.add("d-none");
+    result.textContent = "";
 }
 
 document.querySelector("#start-quiz").addEventListener("click", startQuiz);
