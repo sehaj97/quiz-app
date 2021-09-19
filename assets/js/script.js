@@ -1,5 +1,7 @@
 var timeCounter = document.querySelector("#time-counter");
 var questions = document.querySelector("#heading-questions");
+var quizWrapper = document.querySelector("#quiz-wrapper");
+var scoreWrapper = document.querySelector("#score-wrapper");
 var quizContainer = document.querySelector("#start-quiz-container");
 var answersContainer = document.querySelector("#answers-container");
 var answersButton = document.getElementsByClassName("answers");
@@ -54,12 +56,10 @@ var quizData = [
   ]
 var quizDataId = 0;
 
-var quizData
-
 function countDown(){
     timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2});    
     quizTimer --;
-    if (quizTimer === -1) {
+    if (quizTimer <= -1) {
         stopCountDown();
     }
 }
@@ -75,7 +75,11 @@ function startCountDown(){
 function startQuiz(){
     startCountDown();
     quizContainer.classList.add('d-none');
+    scoreWrapper.classList.add('d-none');
     answersContainer.classList.remove('d-none');
+    quizTimer = 15;
+    score = 0;
+    quizDataId = 0;
     addQuestion();
     
 }
@@ -83,7 +87,6 @@ function startQuiz(){
 function addQuestion(){
     questions.textContent = quizData[quizDataId].question;
     addAnswers();
-    console.log(answersButton)
     for (var i = 0; i < answersButton.length; i++) {
         answersButton[i].addEventListener('click', function(e) {
             checkAnswers(e);
@@ -102,13 +105,11 @@ function checkAnswers(event){
     event.preventDefault();
     if(event.target.id === quizData[quizDataId].correct_answer_id && quizData[quizDataId].id <= quizData.length){
         score++;
-        console.log("score", score);
         if (quizData[quizDataId].id === quizData.length) {
             event.stopImmediatePropagation();
-            console.log("score", score);
+            logScores();
             return;
         }
-        console.log("increment score");
         quizDataId++;
         addQuestion();
     } else {
@@ -118,6 +119,14 @@ function checkAnswers(event){
             stopCountDown();
         }
     }
+}
+
+function logScores(){
+    console.log("score", score);
+    scoreWrapper.classList.remove('d-none');
+    answersContainer.classList.add('d-none');
+    quizWrapper.classList.add('d-none');
+    stopCountDown();
 }
 document.querySelector("#start-quiz").addEventListener("click", startQuiz);
 

@@ -25,36 +25,40 @@
       </header>
 
       <main class="mx-auto p-4 pt-5">
-        <div class="container">
-            <div class="row">
-              <div class="col d-flex justify-content-center">
-                <h1 id="heading-questions">h1. Bootstrap heading</h1>
-              </div>
+        <section id="quiz-wrapper" class="container">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <h1 id="heading-questions">Coding Quiz Challenge</h1>
             </div>
-            
-            <div id="start-quiz-container" class="row">
-              <div class="col d-flex justify-content-center p-3">
-                <button type="button" class="btn btn-info" id="start-quiz">START QUIZ</button>
-              </div>
+          </div>
+          
+          <div id="start-quiz-container" class="row">
+            <div class="col d-flex justify-content-center p-3">
+              <button type="button" class="btn btn-info" id="start-quiz">START QUIZ</button>
             </div>
-            
-            <div class="row">
-              <div id="answers-container" class="col d-flex flex-column align-items-center justify-content-center p-3 d-none">
-                <button type="button" id="answer_a" class="btn btn-info answers">
-                  Default radio
-                </button>
-                <button type="button" id="answer_b" class="btn btn-info answers">
-                  Default radio
-                </button>
-                <button type="button" id="answer_c" class="btn btn-info answers">
-                  Default radio
-                </button>
-                <button type="button" id="answer_d" class="btn btn-info answers">
-                  Default radio
-                </button>
-              </div>
+          </div>
+          
+          <div class="row">
+            <div id="answers-container" class="col d-flex flex-column align-items-center justify-content-center p-3 d-none">
+              <button type="button" id="answer_a" class="btn btn-info answers">
+              </button>
+              <button type="button" id="answer_b" class="btn btn-info answers">
+              </button>
+              <button type="button" id="answer_c" class="btn btn-info answers">
+              </button>
+              <button type="button" id="answer_d" class="btn btn-info answers">
+              </button>
             </div>
-        </div>
+          </div>
+        </section>
+
+        <section id="score-wrapper" class="container d-none">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <h1 id="heading-questions">Submit Your Score</h1>
+            </div>
+          </div>
+        </section>
     </main>
 
       <footer class="mx-auto p-4 pt-5">
