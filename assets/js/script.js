@@ -109,24 +109,27 @@ function checkAnswers(event){
         event.stopImmediatePropagation();
         
         quizDataId++;
-        console.log("ID",quizDataId)
         if (quizDataId < quizData.length) {
             addQuestion();
         } else {
-            event.stopImmediatePropagation();
             logScores();
             return;
         }
     } else {
         quizTimer = quizTimer - 5;
-        if (quizTimer <= -1 || quizData[quizDataId].id === quizData.length) {
+        
+        event.stopImmediatePropagation();
+        console.log("ID",quizDataId);
+        
+        quizDataId++;
+        if (quizDataId < quizData.length && quizTimer > -1) {
+            addQuestion();
+        } else {
             timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2});
             logScores();
             stopCountDown();
             return;
         }
-        quizDataId++;
-        addQuestion();
     }
     
     console.log(quizDataId)
