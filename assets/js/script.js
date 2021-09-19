@@ -27,9 +27,9 @@ var quizData = [
         "description": "this is question 2",
         "answers": {
           "answer_a": "correct",
-          "answer_b": "awrong",
-          "answer_c": "bwrong",
-          "answer_d": "cwrong"
+          "answer_b": "wrong",
+          "answer_c": "wrong",
+          "answer_d": "wrong"
         },
         "correct_answer_id": "answer_a",
         "explanation": "this is why",
@@ -41,10 +41,10 @@ var quizData = [
         "question": "Question3?",
         "description": "this is question 3",
         "answers": {
-          "answer_a": "correct",
-          "answer_b": "awrong",
-          "answer_c": "bwrong",
-          "answer_d": "cwrong"
+          "answer_a": "wrong",
+          "answer_b": "wrong",
+          "answer_c": "correct",
+          "answer_d": "wrong"
         },
         "correct_answer_id": "answer_c",
         "explanation": "this is why",
