@@ -1,3 +1,4 @@
+// variables to handle interactions
 var timeCounter = document.querySelector("#time-counter");
 var questions = document.querySelector("#heading-questions");
 var quizWrapper = document.querySelector("#quiz-wrapper");
@@ -16,6 +17,8 @@ var scoreData = [];
 var scoreDataObject = {};
 var scoreDataId = 0;
 var penaltyTime = 0;
+
+// quiz questions
 var quizData = [
     {
         "id": 1,
@@ -54,7 +57,7 @@ var quizData = [
       }
   ]
 
-
+// count down for quiz time clock
 function countDown(){
     timeCounter.textContent = quizTimer.toLocaleString(undefined, {minimumIntegerDigits: 2});    
     quizTimer --;
@@ -65,14 +68,17 @@ function countDown(){
     }
 }
 
+// stop the countdown
 function stopCountDown (){
     clearInterval(timeClock)
 }
 
+// start the countdown
 function startCountDown(){
     timeClock = setInterval(countDown,1000);
 }
 
+// begin the quiz
 function startQuiz(){
     startCountDown();
     quizContainer.classList.add('d-none');
@@ -93,6 +99,7 @@ function startQuiz(){
     
 }
 
+//get questions
 function addQuestion(){
     questions.textContent = quizData[quizDataId].question;
     addAnswers();
@@ -103,6 +110,7 @@ function addQuestion(){
     }
 }
 
+//get answers
 function addAnswers(){
     document.querySelector("#answer_a").textContent = quizData[quizDataId].answers.answer_a;
     document.querySelector("#answer_b").textContent = quizData[quizDataId].answers.answer_b;
@@ -110,6 +118,8 @@ function addAnswers(){
     document.querySelector("#answer_d").textContent = quizData[quizDataId].answers.answer_d;
 }
 
+
+// validate answers and display next question
 function checkAnswers(event){
     event.preventDefault();
     if(event.target.id === quizData[quizDataId].correct_answer_id && quizData[quizDataId].id <= quizData.length){
@@ -140,6 +150,8 @@ function checkAnswers(event){
     }
 }
 
+
+//show your final score
 function logScores(){
     document.querySelector("#score-text").textContent = score;
     quizTimer = 0;
@@ -152,6 +164,7 @@ function logScores(){
     stopCountDown();
 }
 
+// save your score
 function saveScore(){
     if (document.querySelector("#name-initials").value === ""){
         alert("please enter initials");
@@ -173,6 +186,8 @@ function saveScore(){
     removeResult();
     viewScoreBoard();
 }
+
+// view your score on score board
 function viewScoreBoard(){
     if(quizWrapper.classList.contains('quiz-ongoing')===false && quizWrapper.classList.contains('score-updating') === false){
         document.querySelector("#score-board-wrapper").classList.remove("d-none");
@@ -188,6 +203,8 @@ function viewScoreBoard(){
     }
 }
 
+
+// update score board based on latest addition
 function updateScoreBoard(){
     var scoreTable = document.querySelector("#score-board-list");
     scoreTable.innerHTML = "";
@@ -211,26 +228,31 @@ function updateScoreBoard(){
     }
 }
 
+// refresh the page to go back
 function refreshPage(){
     window.location.reload();
 } 
 
+// remove all the scores
 function clearScores(){
     window.localStorage.clear();
     updateScoreBoard();
 } 
 
+// display if the selected answer was correct or wrong
 function getResult(answerState){
     divider.classList.remove("d-none");
     result.classList.remove("d-none");
     result.textContent = answerState;
 } 
 
+// remove result
 function removeResult(){
     divider.classList.add("d-none");
     result.classList.add("d-none");
     result.textContent = "";
 }
 
+// event handler for starting the quiz
 document.querySelector("#start-quiz").addEventListener("click", startQuiz);
 
